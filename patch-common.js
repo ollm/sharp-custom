@@ -42,10 +42,9 @@ function processFile(filePath, replacements)
 
 walk(ROOT, (file) => {
 
-	const isJSON = file.endsWith('.json');
-	const isJS = file.endsWith('.js');
+	const replace = file.endsWith('.json') || file.endsWith('.js') || file.endsWith('.gyp') || file.endsWith('.yml');
 
-	if(!isJSON && !isJS)
+	if(!replace)
 		return;
 
 	const replacements = [];
@@ -56,7 +55,7 @@ walk(ROOT, (file) => {
 		replace: '@img-custom/sharp-',
 	});
 
-	if(isJSON)
+	if(replace)
 	{
 		replacements.push(
 			{	// Replace lovell/sharp-libvips with ollm/sharp-libvips-custom in .json (For provenance)
