@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const ROOT = process.cwd();
 
@@ -25,7 +25,7 @@ function walk(dir, callback)
 // Apply replacements to a file
 function processFile(filePath, replacements)
 {
-	let content = fs.readFileSync(filePath, 'utf8');
+	const content = fs.readFileSync(filePath, 'utf8');
 	let updated = content;
 
 	for(const {search, replace} of replacements)
@@ -40,7 +40,7 @@ function processFile(filePath, replacements)
 	}
 }
 
-walk(ROOT, function(file) {
+walk(ROOT, (file) => {
 
 	const isJSON = file.endsWith('.json');
 	const isJS = file.endsWith('.js');
@@ -67,14 +67,19 @@ walk(ROOT, function(file) {
 				search: /lovell\/sharp/g,
 				replace: 'ollm/sharp-custom',
 			},
-			{	// Replace version (Only for developing)
+			{	// Replace version (Only for developing): sharp
 				search: /"0\.34\.5"/g,
 				replace: '"0.0.2"',
 			},
-			{	// Replace version (Only for developing)
+			{	// Replace version (Only for developing): sharp-libvips
 				search: /"1\.2\.4"/g,
 				replace: '"0.0.8"',
+			},
+			{	// Replace version (Only for developing): libvips
+				search: /8\.17\.3/g,
+				replace: '8.18.2',
 			}
+			
 		);
 	}
 
