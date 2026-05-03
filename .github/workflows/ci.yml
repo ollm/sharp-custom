@@ -14,6 +14,9 @@ jobs:
         with:
           repository: lovell/sharp
       # CUSTOM - END
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "24"
       # CUSTOM - START
       - name: Checkout custom repository
         uses: actions/checkout@v6
@@ -21,11 +24,8 @@ jobs:
           path: custom
       - name: Apply common patches
         run: |
-          bash ./custom/patch-common.sh
+          node ./custom/patch-common.js
       # CUSTOM - END
-      - uses: actions/setup-node@v5
-        with:
-          node-version: "24"
       - run: npm install --ignore-scripts
       - run: npm run lint-cpp
       - run: npm run lint-js
@@ -193,7 +193,7 @@ jobs:
           path: custom
       - name: Apply common patches
         run: |
-          bash ./custom/patch-common.sh
+          node ./custom/patch-common.js
       # CUSTOM - END
       - run: npm install
       - run: npm run build
@@ -249,7 +249,7 @@ jobs:
           path: custom
       - name: Apply common patches
         run: |
-          bash ./custom/patch-common.sh
+          node ./custom/patch-common.js
       # CUSTOM - END
       - run: npm install
       - run: npm run build
@@ -311,7 +311,7 @@ jobs:
           path: custom
       - name: Apply common patches
         run: |
-          bash ./custom/patch-common.sh
+          node ./custom/patch-common.js
       # CUSTOM - END
       - uses: uraimo/run-on-arch-action@v3
         with:
@@ -357,7 +357,7 @@ jobs:
           path: custom
       - name: Apply common patches
         run: |
-          bash ./custom/patch-common.sh
+          node ./custom/patch-common.js
       # CUSTOM - END
       - name: Dependencies
         run: apt-get update && apt-get install -y pkg-config
@@ -405,7 +405,7 @@ jobs:
           path: custom
       - name: Apply common patches
         run: |
-          bash ./custom/patch-common.sh
+          node ./custom/patch-common.js
       # CUSTOM - END
       - uses: actions/download-artifact@v4
         with:
