@@ -15,7 +15,7 @@ jobs:
           repository: lovell/sharp
       # CUSTOM - END
       # CUSTOM - START
-      - name: Checkout custom build layer
+      - name: Checkout custom repository
         uses: actions/checkout@v6
         with:
           path: custom
@@ -187,13 +187,13 @@ jobs:
           repository: lovell/sharp
       # CUSTOM - END
       # CUSTOM - START
-      - name: Checkout custom build layer
+      - name: Checkout custom repository
         uses: actions/checkout@v6
         with:
           path: custom
       - name: Apply common patches
         run: |
-          bash ./custom/patch-common.sh ${{ matrix.platform }}
+          bash ./custom/patch-common.sh
       # CUSTOM - END
       - run: npm install
       - run: npm run build
@@ -243,13 +243,13 @@ jobs:
           repository: lovell/sharp
       # CUSTOM - END
       # CUSTOM - START
-      - name: Checkout custom build layer
+      - name: Checkout custom repository
         uses: actions/checkout@v6
         with:
           path: custom
       - name: Apply common patches
         run: |
-          bash ./custom/patch-common.sh ${{ matrix.platform }}
+          bash ./custom/patch-common.sh
       # CUSTOM - END
       - run: npm install
       - run: npm run build
@@ -305,13 +305,13 @@ jobs:
           repository: lovell/sharp
       # CUSTOM - END
       # CUSTOM - START
-      - name: Checkout custom build layer
+      - name: Checkout custom repository
         uses: actions/checkout@v6
         with:
           path: custom
       - name: Apply common patches
         run: |
-          bash ./custom/patch-common.sh ${{ matrix.platform }}
+          bash ./custom/patch-common.sh
       # CUSTOM - END
       - uses: uraimo/run-on-arch-action@v3
         with:
@@ -351,7 +351,7 @@ jobs:
           repository: lovell/sharp
       # CUSTOM - END
       # CUSTOM - START
-      - name: Checkout custom build layer
+      - name: Checkout custom repository
         uses: actions/checkout@v6
         with:
           path: custom
@@ -399,7 +399,7 @@ jobs:
           repository: lovell/sharp
       # CUSTOM - END
       # CUSTOM - START
-      - name: Checkout custom build layer
+      - name: Checkout custom repository
         uses: actions/checkout@v6
         with:
           path: custom
