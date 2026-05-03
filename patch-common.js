@@ -82,6 +82,14 @@ walk(ROOT, (file) => {
 		);
 	}
 
+	if(file.endsWith('.gyp'))
+	{
+		replacements.push({
+			search: /('libraries'\s*:\s*\[[^\]]*)/g,
+			replace: `$1\n        'glib-2.0.lib',\n        'gobject-2.0.lib',\n        'gio-2.0.lib',`
+		});
+	}
+
 	processFile(file, replacements);
 
 });
