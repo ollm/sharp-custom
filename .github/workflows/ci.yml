@@ -2,6 +2,8 @@ name: CI
 on:
   - push
   - pull_request
+env:
+  SHARP_TAG: v0.35.0-rc.5
 permissions: {}
 jobs:
   lint:
@@ -13,6 +15,7 @@ jobs:
       # CUSTOM - START
         with:
           repository: lovell/sharp
+          ref: ${{ env.SHARP_TAG }}
       # CUSTOM - END
       - uses: actions/setup-node@v5
         with:
@@ -185,6 +188,7 @@ jobs:
       # CUSTOM - START
         with:
           repository: lovell/sharp
+          ref: ${{ env.SHARP_TAG }}
       # CUSTOM - END
       # CUSTOM - START
       - name: Checkout custom repository
@@ -242,6 +246,7 @@ jobs:
       # CUSTOM - START
         with:
           repository: lovell/sharp
+          ref: ${{ env.SHARP_TAG }}
       # CUSTOM - END
       # CUSTOM - START
       - name: Checkout custom repository
@@ -304,6 +309,7 @@ jobs:
       # CUSTOM - START
         with:
           repository: lovell/sharp
+          ref: ${{ env.SHARP_TAG }}
       # CUSTOM - END
       # CUSTOM - START
       - name: Checkout custom repository
@@ -353,6 +359,7 @@ jobs:
       # CUSTOM - START
         with:
           repository: lovell/sharp
+          ref: ${{ env.SHARP_TAG }}
       # CUSTOM - END
       # CUSTOM - START
       - name: Checkout custom repository
@@ -401,6 +408,7 @@ jobs:
       # CUSTOM - START
         with:
           repository: lovell/sharp
+          ref: ${{ env.SHARP_TAG }}
       # CUSTOM - END
       # CUSTOM - START
       - name: Checkout custom repository
@@ -433,6 +441,6 @@ jobs:
       - name: Publish platform-specific npm packages
         if: startsWith(github.ref, 'refs/tags/v')
         run: cd npm && npm publish --workspaces --tag=${{ contains(github.ref, '-rc') && 'next' || 'latest' }}
-      - name: Publish sharp npm package
-        if: startsWith(github.ref, 'refs/tags/v')
-        run: npm publish --tag=${{ contains(github.ref, '-rc') && 'next' || 'latest' }}
+      #- name: Publish sharp npm package
+      #  if: startsWith(github.ref, 'refs/tags/v')
+      #  run: npm publish --tag=${{ contains(github.ref, '-rc') && 'next' || 'latest' }}
