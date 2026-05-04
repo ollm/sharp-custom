@@ -72,7 +72,7 @@ walk(ROOT, (file) => {
 			},
 			{	// Replace version (Only for developing): sharp-libvips
 				search: /"1\.2\.4"/g,
-				replace: '"0.0.8"',
+				replace: '"0.0.9"',
 			},
 			{	// Replace version (Only for developing): libvips
 				search: /8\.17\.3/g,
@@ -87,11 +87,11 @@ walk(ROOT, (file) => {
 		replacements.push(
 			{
 				search: /(\['OS\s*==\s*"win"',\s*{\s*'defines':\s*\[\s*'_ALLOW_KEYWORD_MACROS',\s*'_FILE_OFFSET_BITS=64'\s*\],\s*'link_settings':\s*{\s*'libraries':\s*\[[^\]]*)/g,
-				replace: `$1,\n        'glib-2.0.lib',\n        'gobject-2.0.lib',\n        'gio-2.0.lib'`
+				replace: `$1,\n        'libglib-2.0.lib',\n        'libgobject-2.0.lib',\n        'libgio-2.0.lib'`
 			},
 			{
 				search: /('library_dirs':\s*\[\s*'<\(sharp_libvips_lib_dir\)'\s*\],\s*'libraries':\s*\[[^\]]*)/g,
-				replace: `$1\n        'glib-2.0.lib',\n        'gobject-2.0.lib',\n        'gio-2.0.lib',`
+				replace: `$1\n        'libglib-2.0.lib',\n        'libgobject-2.0.lib',\n        'libgio-2.0.lib',`
 			}
 		);
 	}
