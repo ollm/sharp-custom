@@ -395,7 +395,7 @@ jobs:
       - build-native
       - build-linuxmusl-arm64
       - build-qemu
-      - build-emscripten
+    #  - build-emscripten
     steps:
       - uses: actions/checkout@v6
       # CUSTOM - START
