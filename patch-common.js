@@ -68,7 +68,7 @@ walk(ROOT, (file) => {
 			},
 			{	// Replace version (Only for developing): sharp
 				search: /"0\.34\.5"/g,
-				replace: '"0.0.2"',
+				replace: '"0.0.3"',
 			},
 			{	// Replace version (Only for developing): sharp-libvips
 				search: /"1\.2\.4"/g,
