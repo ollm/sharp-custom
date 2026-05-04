@@ -47,8 +47,8 @@ walk(ROOT, (file) => {
 
 	const replace = file.endsWith('.json') || file.endsWith('.js') || file.endsWith('.gyp') || file.endsWith('.yml');
 
-	if(!replace && false) // Try checking all files
-		return;
+	//if(!replace) // Try checking all files
+	//	return;
 
 	const replacements = [];
 
