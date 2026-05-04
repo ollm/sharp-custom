@@ -15,6 +15,9 @@ function walk(dir, callback)
 		if(entry.name === '.git')
 			continue;
 
+		if(fullPath.includes('/custom/patch-common.js') || fullPath.includes('/custom/.github'))
+			continue;
+
 		if(entry.isDirectory())
 			walk(fullPath, callback);
 		else if(entry.isFile())
@@ -73,8 +76,8 @@ walk(ROOT, (file) => {
 			{	// Replace version (Only for developing): sharp-libvips
 				search: /"1\.3\.0-rc\.5"/g,
 				replace: '"1.3.0-rc.6"',
-			},
-			/*{	// Replace version (Only for developing): libvips
+			},/*
+			{	// Replace version (Only for developing): libvips
 				search: /8\.17\.3/g,
 				replace: '8.18.2',
 			}*/
