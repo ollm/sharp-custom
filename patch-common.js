@@ -91,7 +91,7 @@ walk(ROOT, (file) => {
 			},
 			{
 				search: /('library_dirs':\s*\[\s*'<\(sharp_libvips_lib_dir\)'\s*\],\s*'libraries':\s*\[[^\]]*)/g,
-				replace: `$1\n        'libglib-2.0.lib',\n        'libgobject-2.0.lib',\n        'libgio-2.0.lib',`
+				replace: `$1,\n        'libglib-2.0.lib',\n        'libgobject-2.0.lib',\n        'libgio-2.0.lib'`
 			}
 		);
 	}
