@@ -3,7 +3,7 @@ on:
   - push
   - pull_request
 env:
-  SHARP_TAG: v0.35.0-rc.5
+  SHARP_TAG: '0.35'
 permissions: {}
 jobs:
   lint:
