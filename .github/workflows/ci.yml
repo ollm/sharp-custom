@@ -4,6 +4,7 @@ on:
   - pull_request
 env:
   SHARP_TAG: '0.35'
+  SHARP_IGNORE_GLOBAL_LIBVIPS: '1'
 permissions: {}
 jobs:
   lint:
