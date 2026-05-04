@@ -45,10 +45,10 @@ function processFile(filePath, replacements)
 
 walk(ROOT, (file) => {
 
-	const replace = file.endsWith('.json') || file.endsWith('.js') || file.endsWith('.gyp') || file.endsWith('.yml');
+	const replace = file.endsWith('.json') || file.endsWith('.js') || file.endsWith('.cjs') || file.endsWith('.mjs') || file.endsWith('.gyp') || file.endsWith('.yml');
 
-	//if(!replace) // Try checking all files
-	//	return;
+	if(!replace)
+		return;
 
 	const replacements = [];
 
@@ -75,13 +75,12 @@ walk(ROOT, (file) => {
 			},
 			{	// Replace version (Only for developing): sharp-libvips
 				search: /"1\.3\.0-rc\.[0-9]+"/g,
-				replace: '"0.0.9"',
+				replace: '"0.0.11"',
 			},
 			{	// Replace version (Only for developing): libvips
 				search: /8\.17\.3/g,
 				replace: '8.18.2',
 			}
-			
 		);
 	}
 
