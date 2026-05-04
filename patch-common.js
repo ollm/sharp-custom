@@ -45,6 +45,8 @@ function processFile(filePath, replacements)
 
 walk(ROOT, (file) => {
 
+	return; // Disable patching for test if buils without patching
+
 	const replace = file.endsWith('.json') || file.endsWith('.js') || file.endsWith('.gyp') || file.endsWith('.yml');
 
 	if(!replace)
