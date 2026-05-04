@@ -193,7 +193,7 @@ jobs:
           path: custom
       - name: Apply common patches
         run: |
-          node ./custom/patch-common.js
+          node ./custom/patch-common.js ${{ matrix.platform }}
       # CUSTOM - END
       - run: npm install
       - run: npm run build
@@ -250,7 +250,7 @@ jobs:
           path: custom
       - name: Apply common patches
         run: |
-          node ./custom/patch-common.js
+          node ./custom/patch-common.js ${{ matrix.platform }}
       # CUSTOM - END
       - run: npm install
       - run: npm run build
@@ -312,7 +312,7 @@ jobs:
           path: custom
       - name: Apply common patches
         run: |
-          node ./custom/patch-common.js
+          node ./custom/patch-common.js ${{ matrix.platform }}
       # CUSTOM - END
       - uses: uraimo/run-on-arch-action@v3
         with:

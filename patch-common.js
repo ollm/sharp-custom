@@ -84,10 +84,16 @@ walk(ROOT, (file) => {
 
 	if(file.endsWith('.gyp'))
 	{
-		replacements.push({
-		search: /(\['OS\s*==\s*"win"',\s*{\s*'defines':\s*\[\s*'_ALLOW_KEYWORD_MACROS',\s*'_FILE_OFFSET_BITS=64'\s*\],\s*'link_settings':\s*{\s*'libraries':\s*\[[^\]]*)/g,
-		replace: `$1\n        'glib-2.0.lib',\n        'gobject-2.0.lib',\n        'gio-2.0.lib',`
-		});
+		replacements.push(
+			{
+				search: /(\['OS\s*==\s*"win"',\s*{\s*'defines':\s*\[\s*'_ALLOW_KEYWORD_MACROS',\s*'_FILE_OFFSET_BITS=64'\s*\],\s*'link_settings':\s*{\s*'libraries':\s*\[[^\]]*)/g,
+				replace: `$1,\n        'glib-2.0.lib',\n        'gobject-2.0.lib',\n        'gio-2.0.lib'`
+			},
+			{
+				search: /('library_dirs':\s*\[\s*'<\(sharp_libvips_lib_dir\)'\s*\],\s*'libraries':\s*\[[^\]]*)/g,
+				replace: `$1\n        'glib-2.0.lib',\n        'gobject-2.0.lib',\n        'gio-2.0.lib',`
+			}
+		);
 	}
 
 	processFile(file, replacements);
