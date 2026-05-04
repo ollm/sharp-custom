@@ -71,8 +71,8 @@ walk(ROOT, (file) => {
 				replace: '"0.10.0"',
 			},*/
 			{	// Replace version (Only for developing): sharp-libvips
-				search: /"@1\.3\.0-rc\.5"/g,
-				replace: '"@1.3.0-rc.6"',
+				search: /"1\.3\.0-rc\.5"/g,
+				replace: '"1.3.0-rc.6"',
 			},
 			/*{	// Replace version (Only for developing): libvips
 				search: /8\.17\.3/g,
