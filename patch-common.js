@@ -43,13 +43,11 @@ function processFile(filePath, replacements)
 	}
 }
 
-// Disable patching for test if buils without patching
-/*
 walk(ROOT, (file) => {
 
 	const replace = file.endsWith('.json') || file.endsWith('.js') || file.endsWith('.gyp') || file.endsWith('.yml');
 
-	if(!replace)
+	if(!replace && false) // Try checking all files
 		return;
 
 	const replacements = [];
@@ -104,4 +102,3 @@ walk(ROOT, (file) => {
 	processFile(file, replacements);
 
 });
-*/
