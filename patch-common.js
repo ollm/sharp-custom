@@ -74,6 +74,10 @@ walk(ROOT, (file) => {
 				search: /\(name\.startsWith\('libvips-'\)\s*&&\s*name\.endsWith\('\.dll'\)\);/g,
 				replace: '(name.startsWith(\'libvips-\') && name.endsWith(\'.dll\')) ||\n      (name.endsWith(\'.dll\'));',
 			},
+			{	// Test
+				search: /filter: \(file\) => \{/g,
+				replace: 'filter: (file) => {console.log(\'File:\', file);',
+			},
 			{	// Replace version (Only for developing): sharp
 				search: /"0\.35\.0-rc\.[0-9]+"/g,
 				replace: '"0.11.1"',
