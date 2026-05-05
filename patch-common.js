@@ -52,7 +52,7 @@ walk(ROOT, (file) => {
 
 	const replacements = [];
 
-	// Replace @img/sharp with @img-custom/sharp in .json and .js only
+	// Replace @img/sharp with @img-custom/sharp
 	replacements.push({
 		search: /@img\/sharp-/g,
 		replace: '@img-custom/sharp-',
@@ -60,6 +60,7 @@ walk(ROOT, (file) => {
 
 	if(replace)
 	{
+		// TODO: Apply only to specific files and abort if they don't match; using this approach for now.
 		replacements.push(
 			{	// Replace lovell/sharp-libvips with ollm/sharp-libvips-custom in .json (For provenance)
 				search: /lovell\/sharp-libvips/g,
@@ -69,9 +70,13 @@ walk(ROOT, (file) => {
 				search: /lovell\/sharp/g,
 				replace: 'ollm/sharp-custom',
 			},
+			{	// Add all Windows dll
+				search: /\(name\.startsWith\('libvips-'\)\s*&&\s*name\.endsWith\('\.dll'\)\);/g,
+				replace: '(name.startsWith(\'libvips-\') && name.endsWith(\'.dll\')) ||\n      (name.endsWith(\'.dll\'));',
+			},
 			{	// Replace version (Only for developing): sharp
 				search: /"0\.35\.0-rc\.[0-9]+"/g,
-				replace: '"0.11.0"',
+				replace: '"0.11.1"',
 			},
 			{	// Replace version (Only for developing): sharp-libvips
 				search: /"1\.3\.0-rc\.[0-9]+"/g,
@@ -84,6 +89,7 @@ walk(ROOT, (file) => {
 		);
 	}
 
+	// TODO: Apply only to specific files and abort if they don't match; using this approach for now.
 	if(file.endsWith('.gyp'))
 	{
 		replacements.push(
