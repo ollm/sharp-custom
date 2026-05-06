@@ -199,11 +199,11 @@ walk(ROOT, (file) => {
 		replacements.push(
 			{
 				search: /(\['OS\s*==\s*"win"',\s*{\s*'defines':\s*\[\s*'_ALLOW_KEYWORD_MACROS',\s*'_FILE_OFFSET_BITS=64',\s*'_HAS_EXCEPTIONS=1'\s*\],\s*'link_settings':\s*{\s*'libraries':\s*\[\s*)[^\]\s]*/g,
-				replace: `$1,\n        ${lib.map(name => `'${name}'`).join(',\n        ')}`,
+				replace: `$1${lib.map(name => `'${name}'`).join(',\n        ')}`,
 			},
 			{
 				search: /('library_dirs':\s*\[\s*'<\(sharp_libvips_lib_dir\)'\s*\],\s*'libraries':\s*\[\s*)[^\]\s]*/g,
-				replace: `$1,\n        ${lib.map(name => `'${name}'`).join(',\n        ')}`,
+				replace: `$1${lib.map(name => `'${name}'`).join(',\n        ')}`,
 			},
 			{
 				search: /'\<\(sharp_libvips_lib_dir\)\/libvips-42\.dll'/g,
