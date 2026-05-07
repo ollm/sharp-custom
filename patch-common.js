@@ -96,7 +96,7 @@ walk(ROOT, (file) => {
 	// TODO: Apply only to specific files and abort if they don't match; using this approach for now.
 	if(file.endsWith('.gyp'))
 	{
-		const lib = [
+		/*const lib = [
 			// 'libc++.lib',
 			//'libunwind.lib',
 			'libffi.lib',
@@ -174,6 +174,14 @@ walk(ROOT, (file) => {
 			'libgdk_pixbuf-2.0.lib',
 
 			'libvips-cpp.lib',
+			'libvips.lib',
+		];*/
+
+		const lib = [
+			'libglib-2.0.lib',
+			'libgobject-2.0.lib',
+			'libgio-2.0.lib',
+			// 'libvips-cpp.lib',
 			'libvips.lib',
 		];
 
@@ -264,18 +272,18 @@ walk(ROOT, (file) => {
 		];
 
 		replacements.push(
-			//{
-			//	search: /(\['OS\s*==\s*"win"',\s*{\s*'defines':\s*\[\s*'_ALLOW_KEYWORD_MACROS',\s*'_FILE_OFFSET_BITS=64',\s*'_HAS_EXCEPTIONS=1'\s*\],\s*'link_settings':\s*{\s*'libraries':\s*\[\s*)[^\]\s]*/g,
-			//	replace: `$1${lib.map(name => `'${name}'`).join(',\n        ')}`,
-			//},
-			//{
-			//	search: /('library_dirs':\s*\[\s*'<\(sharp_libvips_lib_dir\)'\s*\],\s*'libraries':\s*\[\s*)[^\]\s]*/g,
-			//	replace: `$1${lib.map(name => `'${name}'`).join(',\n        ')}`,
-			//},
-			//{
-			//	search: /'\<\(sharp_libvips_lib_dir\)\/libvips-42\.dll'/g,
-			//	replace: dll.map(name => `'<(sharp_libvips_lib_dir)/${name}'`).join(',\n        '),
-			//}
+			{
+				search: /(\['OS\s*==\s*"win"',\s*{\s*'defines':\s*\[\s*'_ALLOW_KEYWORD_MACROS',\s*'_FILE_OFFSET_BITS=64',\s*'_HAS_EXCEPTIONS=1'\s*\],\s*'link_settings':\s*{\s*'libraries':\s*\[\s*)[^\]\s]*/g,
+				replace: `$1${lib.map(name => `'${name}'`).join(',\n        ')}`,
+			},
+			{
+				search: /('library_dirs':\s*\[\s*'<\(sharp_libvips_lib_dir\)'\s*\],\s*'libraries':\s*\[\s*)[^\]\s]*/g,
+				replace: `$1${lib.map(name => `'${name}'`).join(',\n        ')}`,
+			},
+			{
+				search: /'\<\(sharp_libvips_lib_dir\)\/libvips-42\.dll'/g,
+				replace: dll.map(name => `'<(sharp_libvips_lib_dir)/${name}'`).join(',\n        '),
+			}
 		);
 	}
 
