@@ -97,8 +97,8 @@ walk(ROOT, (file) => {
 	if(file.endsWith('.gyp'))
 	{
 		const lib = [
-			'libc++.lib',
-			'libunwind.lib',
+			// 'libc++.lib',
+			//'libunwind.lib',
 			'libffi.lib',
 
 			'libz1.lib',
@@ -184,7 +184,7 @@ walk(ROOT, (file) => {
 			'vips-modules-8.18/vips-openslide.dll',
 			'vips-modules-8.18/vips-poppler.dll',
 
-			'libc++.dll',
+			// 'libc++.dll',
 			'libunwind.dll',
 			'libffi-8.dll',
 
