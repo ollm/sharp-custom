@@ -80,7 +80,7 @@ walk(ROOT, (file) => {
 			},
 			{	// Replace version (Only for developing): sharp
 				search: /"0\.35\.0-rc\.[0-9]+"/g,
-				replace: '"0.12.0"',
+				replace: '"0.12.1"',
 			},
 			{	// Replace version (Only for developing): sharp-libvips
 				search: /"1\.3\.0-rc\.[0-9]+"/g,
@@ -96,7 +96,7 @@ walk(ROOT, (file) => {
 	// TODO: Apply only to specific files and abort if they don't match; using this approach for now.
 	if(file.endsWith('.gyp'))
 	{
-		const lib = [
+		/*const lib = [
 			'libc++.lib',
 			'libunwind.lib',
 			'libffi.lib',
@@ -175,14 +175,17 @@ walk(ROOT, (file) => {
 
 			'libvips-cpp.lib',
 			'libvips.lib',
+		];*/
+
+		const lib = [
+			//'libglib-2.0.lib',
+			//'libgobject-2.0.lib',
+			//'libgio-2.0.lib',
+			//// 'libvips-cpp.lib',
+			'libvips.lib',
 		];
 
 		const dll = [
-
-			'vips-modules-8.18/vips-jxl.dll',
-			'vips-modules-8.18/vips-magick.dll',
-			'vips-modules-8.18/vips-openslide.dll',
-			'vips-modules-8.18/vips-poppler.dll',
 
 			'libc++.dll',
 			'libunwind.dll',
@@ -263,18 +266,33 @@ walk(ROOT, (file) => {
 			'libvips-42.dll',
 		];
 
+		const modules = [
+			'vips-jxl.dll',
+			'vips-magick.dll',
+			'vips-openslide.dll',
+			'vips-poppler.dll',
+		];
+
 		replacements.push(
 			{
 				search: /(\['OS\s*==\s*"win"',\s*{\s*'defines':\s*\[\s*'_ALLOW_KEYWORD_MACROS',\s*'_FILE_OFFSET_BITS=64',\s*'_HAS_EXCEPTIONS=1'\s*\],\s*'link_settings':\s*{\s*'libraries':\s*\[\s*)[^\]\s]*/g,
-				replace: `$1${lib.map(name => `'${name}'`).join(',\n        ')}`,
+				replace: `$1${lib.map(name => `'${name}'`).join(',\n            ')}`,
 			},
 			{
 				search: /('library_dirs':\s*\[\s*'<\(sharp_libvips_lib_dir\)'\s*\],\s*'libraries':\s*\[\s*)[^\]\s]*/g,
-				replace: `$1${lib.map(name => `'${name}'`).join(',\n        ')}`,
+				replace: `$1${lib.map(name => `'${name}'`).join(',\n            ')}`,
 			},
 			{
-				search: /'\<\(sharp_libvips_lib_dir\)\/libvips-42\.dll'/g,
-				replace: dll.map(name => `'<(sharp_libvips_lib_dir)/${name}'`).join(',\n        '),
+				search: /'\<\(sharp_libvips_lib_dir\)\/libvips-42\.dll'\s*\]\s*}/g,
+				replace: `${dll.map(name => `'<(sharp_libvips_lib_dir)/${name}'`).join(',\n            ')}
+          ]
+        },
+        {
+          'destination': 'build/Release/vips-modules-<(vips_version)',
+          'files': [
+            ${modules.map(name => `'<(sharp_libvips_lib_dir)/vips-modules-<(vips_version)/${name}'`).join(',\n            ')}
+          ]
+        }`,
 			}
 		);
 	}
