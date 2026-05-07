@@ -178,9 +178,9 @@ walk(ROOT, (file) => {
 		];*/
 
 		const lib = [
-			//'libglib-2.0.lib',
-			//'libgobject-2.0.lib',
-			//'libgio-2.0.lib',
+			'libglib-2.0.lib',
+			'libgobject-2.0.lib',
+			'libgio-2.0.lib',
 			//// 'libvips-cpp.lib',
 			'libvips.lib',
 		];
