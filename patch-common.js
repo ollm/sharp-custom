@@ -272,10 +272,10 @@ walk(ROOT, (file) => {
 			//	search: /('library_dirs':\s*\[\s*'<\(sharp_libvips_lib_dir\)'\s*\],\s*'libraries':\s*\[\s*)[^\]\s]*/g,
 			//	replace: `$1${lib.map(name => `'${name}'`).join(',\n        ')}`,
 			//},
-			{
-				search: /'\<\(sharp_libvips_lib_dir\)\/libvips-42\.dll'/g,
-				replace: dll.map(name => `'<(sharp_libvips_lib_dir)/${name}'`).join(',\n        '),
-			}
+			//{
+			//	search: /'\<\(sharp_libvips_lib_dir\)\/libvips-42\.dll'/g,
+			//	replace: dll.map(name => `'<(sharp_libvips_lib_dir)/${name}'`).join(',\n        '),
+			//}
 		);
 	}
 
