@@ -80,11 +80,11 @@ walk(ROOT, (file) => {
 			},
 			{	// Replace version (Only for developing): sharp
 				search: /"0\.35\.0-rc\.[0-9]+"/g,
-				replace: '"0.11.5"',
+				replace: '"0.12.0"',
 			},
 			{	// Replace version (Only for developing): sharp-libvips
 				search: /"1\.3\.0-rc\.[0-9]+"/g,
-				replace: '"1.3.0-rc.6-3"',
+				replace: '"1.3.0-rc.6-4"',
 			},
 			{	// Replace version (Only for developing): libvips
 				search: /8\.17\.3/g,
@@ -96,9 +96,9 @@ walk(ROOT, (file) => {
 	// TODO: Apply only to specific files and abort if they don't match; using this approach for now.
 	if(file.endsWith('.gyp'))
 	{
-		/*const lib = [
-			// 'libc++.lib',
-			//'libunwind.lib',
+		const lib = [
+			'libc++.lib',
+			'libunwind.lib',
 			'libffi.lib',
 
 			'libz1.lib',
@@ -175,14 +175,6 @@ walk(ROOT, (file) => {
 
 			'libvips-cpp.lib',
 			'libvips.lib',
-		];*/
-
-		const lib = [
-			'libglib-2.0.lib',
-			'libgobject-2.0.lib',
-			'libgio-2.0.lib',
-			// 'libvips-cpp.lib',
-			'libvips.lib',
 		];
 
 		const dll = [
@@ -192,7 +184,7 @@ walk(ROOT, (file) => {
 			'vips-modules-8.18/vips-openslide.dll',
 			'vips-modules-8.18/vips-poppler.dll',
 
-			// 'libc++.dll',
+			'libc++.dll',
 			'libunwind.dll',
 			'libffi-8.dll',
 
