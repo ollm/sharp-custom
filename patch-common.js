@@ -80,11 +80,11 @@ walk(ROOT, (file) => {
 			},
 			{	// Replace version (Only for developing): sharp
 				search: /"0\.35\.0-rc\.[0-9]+"/g,
-				replace: '"0.11.4"',
+				replace: '"0.11.5"',
 			},
 			{	// Replace version (Only for developing): sharp-libvips
 				search: /"1\.3\.0-rc\.[0-9]+"/g,
-				replace: '"1.3.0-rc.6-2"',
+				replace: '"1.3.0-rc.6-3"',
 			},
 			{	// Replace version (Only for developing): libvips
 				search: /8\.17\.3/g,
@@ -178,6 +178,12 @@ walk(ROOT, (file) => {
 		];
 
 		const dll = [
+
+			'vips-modules-8.18/vips-jxl.dll',
+			'vips-modules-8.18/vips-magick.dll',
+			'vips-modules-8.18/vips-openslide.dll',
+			'vips-modules-8.18/vips-poppler.dll',
+
 			'libc++.dll',
 			'libunwind.dll',
 			'libffi-8.dll',
