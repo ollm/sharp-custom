@@ -80,7 +80,7 @@ walk(ROOT, (file) => {
 			},
 			{	// Replace version (Only for developing): sharp
 				search: /"0\.35\.0-rc\.[0-9]+"/g,
-				replace: '"0.12.1"',
+				replace: '"0.12.2"',
 			},
 			{	// Replace version (Only for developing): sharp-libvips
 				search: /"1\.3\.0-rc\.[0-9]+"/g,
@@ -273,6 +273,8 @@ walk(ROOT, (file) => {
 			'vips-poppler.dll',
 		];
 
+		$vipsVersion = '8.18';
+
 		replacements.push(
 			{
 				search: /(\['OS\s*==\s*"win"',\s*{\s*'defines':\s*\[\s*'_ALLOW_KEYWORD_MACROS',\s*'_FILE_OFFSET_BITS=64',\s*'_HAS_EXCEPTIONS=1'\s*\],\s*'link_settings':\s*{\s*'libraries':\s*\[\s*)[^\]\s]*/g,
@@ -288,9 +290,9 @@ walk(ROOT, (file) => {
           ]
         },
         {
-          'destination': 'build/Release/vips-modules-<(vips_version)',
+          'destination': 'build/Release/vips-modules-${$vipsVersion}}',
           'files': [
-            ${modules.map(name => `'<(sharp_libvips_lib_dir)/vips-modules-<(vips_version)/${name}'`).join(',\n            ')}
+            ${modules.map(name => `'<(sharp_libvips_lib_dir)/vips-modules-${$vipsVersion}/${name}'`).join(',\n            ')}
           ]
         }`,
 			}
