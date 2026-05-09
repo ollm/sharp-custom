@@ -1,17 +1,22 @@
 # Custom Sharp Build
 
-`sharp-custom` and `sharp-libvips-custom` (`@img-custom`) are prebuilt Sharp binaries with built-in support for `JXL` and `JP2` (WASM builds are not available).
+Built from: [`lovell/sharp`](https://github.com/lovell/sharp/)
 
-> `JXL` is not available on `linux-s390x`, `linux-riscv64`, and `linux-armv6` due to lack of Highway SIMD support.
+`sharp-custom` and `sharp-libvips-custom` (`@img-custom`) provide prebuilt Sharp binaries with:
 
-These builds also enable `AV1_HIGHBITDEPTH`, allowing decoding of 10/12-bit AVIF images.
+- `JXL` support
+- `JP2` support
+- `AV1_HIGHBITDEPTH` enabled for 10/12-bit AVIF decoding
+
+> `WASM` builds are not available.
+`JXL` is not available on `linux-s390x`, `linux-riscv64`, and `linux-armv6` due to missing Highway SIMD support.
 
 > [!WARNING]
-> Use the official Sharp binaries unless you specifically need these features.
+> Prefer the official Sharp binaries unless you specifically need these features.
 
 ## Usage
 
-Add the following `overrides` to your `package.json`, making sure the versions match those of your installed `sharp` and `sharp-libvips`.
+Add the following `overrides` to your `package.json`, making sure the versions match your installed `sharp` and `sharp-libvips` dependencies.
 
 ```bash
 npm install

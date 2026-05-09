@@ -80,7 +80,7 @@ walk(ROOT, (file) => {
 			},
 			{	// Replace version (Only for developing): sharp
 				search: /"0\.35\.0-rc\.[0-9]+"/g,
-				replace: '"0.13.0"',
+				replace: '"0.13.1"',
 			},
 			{	// Replace version (Only for developing): sharp-libvips
 				search: /"1\.3\.0-rc\.[0-9]+"/g,
@@ -112,7 +112,7 @@ walk(ROOT, (file) => {
 
 			'libz1.dll',
 			'libznz.dll',
-			// 'libzstd.dll',
+			'libzstd.dll',
 			'libbrotlicommon.dll',
 			'libbrotlidec.dll',
 			'libbrotlienc.dll',
@@ -159,11 +159,11 @@ walk(ROOT, (file) => {
 			'libimagequant.dll',
 			'libcgif-0.dll',
 			'libexif-12.dll',
-			// 'libmatio-14.dll',
-			// 'libniftiio.dll',
-			// 'libcfitsio.dll',
-			// 'libdicom-1.dll',
-			// 'libraw_r-24.dll',
+			'libmatio-14.dll',
+			'libniftiio.dll',
+			'libcfitsio.dll',
+			'libdicom-1.dll',
+			'libraw_r-24.dll',
 			// 'libopenslide-1.dll',
 
 			// 'libpoppler-158.dll',
@@ -171,16 +171,16 @@ walk(ROOT, (file) => {
 			'librsvg-2-2.dll',
 
 			'libarchive-13.dll',
-			// 'libsqlite3-0.dll',
-			// 'libfftw3-3.dll',
+			'libsqlite3-0.dll',
+			'libfftw3-3.dll',
 
 			'libIex-3_1.dll',
 			'libIlmThread-3_1.dll',
-			// 'libOpenEXR-3_1.dll',
+			'libOpenEXR-3_1.dll',
 
 			// 'libMagickCore-6.Q16-7.dll',
 
-			// 'libgdk_pixbuf-2.0-0.dll',
+			'libgdk_pixbuf-2.0-0.dll',
 
 			'libvips-42.dll',
 		];
