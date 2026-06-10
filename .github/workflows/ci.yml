@@ -3,7 +3,7 @@ on:
   - push
   - pull_request
 env:
-  SHARP_TAG: v0.35.0-rc.5
+  SHARP_TAG: v0.35.0-rc.7
   SHARP_IGNORE_GLOBAL_LIBVIPS: '1'
 permissions: {}
 jobs:
@@ -65,7 +65,7 @@ jobs:
             nodejs_version_major: 24
             platform: linux-x64
           - os: ubuntu-24.04
-            container: node:20-alpine3.18
+            container: node:20-alpine3.20
             nodejs_version_major: 20
             platform: linuxmusl-x64
             package: true

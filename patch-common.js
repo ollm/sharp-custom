@@ -64,6 +64,7 @@ walk(ROOT, (file) => {
 			search: /lovell\/sharp/g,
 			replace: 'ollm/sharp-custom',
 		},
+		/*
 		{	// Replace version (Only for developing): sharp
 			search: /"0\.35\.0-rc\.[0-9]+"/g,
 			replace: '"0.14.1"',
@@ -75,7 +76,7 @@ walk(ROOT, (file) => {
 		{	// Replace version (Only for developing): libvips
 			search: /8\.17\.3/g,
 			replace: '8.18.2',
-		}
+		}*/
 	];
 
 	processFile(file, replacements);
