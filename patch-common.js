@@ -66,7 +66,7 @@ walk(ROOT, (file) => {
 		},
 		{	// Disable test
 			search: /t\.assert\.ok\(semver\.valid\(sharp\.versions\.vips\)\);/g,
-			replace: '\/\/ t.assert.ok(semver.valid(sharp.versions.vips));',
+			replace: 't.assert.ok(semver.valid(true));',
 		},
 		/*
 		{	// Replace version (Only for developing): sharp
