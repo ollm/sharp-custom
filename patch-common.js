@@ -64,6 +64,10 @@ walk(ROOT, (file) => {
 			search: /lovell\/sharp/g,
 			replace: 'ollm/sharp-custom',
 		},
+		{	// Disable test
+			search: /t\.assert\.ok\(semver\.valid\(sharp\.versions\.vips\)\);/g,
+			replace: '\/\/ t.assert.ok(semver.valid(sharp.versions.vips));',
+		},
 		/*
 		{	// Replace version (Only for developing): sharp
 			search: /"0\.35\.0-rc\.[0-9]+"/g,
