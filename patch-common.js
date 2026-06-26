@@ -64,7 +64,7 @@ walk(ROOT, (file) => {
 			search: /lovell\/sharp/g,
 			replace: 'ollm/sharp-custom',
 		},
-		{	// Disable test
+		{	// Disable test (In windows libvips has comit hash in custom)
 			search: /t\.assert\.ok\(semver\.valid\(sharp\.versions\.vips\)\);/g,
 			replace: 't.assert.ok(true);',
 		},
