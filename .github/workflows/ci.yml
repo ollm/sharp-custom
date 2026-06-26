@@ -455,14 +455,13 @@ jobs:
         run: npm run package-release-notes
       - name: Create GitHub release for tag
         if: startsWith(github.ref, 'refs/tags/v')
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh release create \
-            --notes-file release-notes.md \
-            ${{ contains(github.ref, '-rc') && '--prerelease --latest=false' || '' }} \
-            ${GITHUB_REF_NAME} \
-            npm-workspace.tar.xz
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: npm-workspace.tar.xz
+          artifactContentType: application/x-xz
+          prerelease: ${{ contains(github.ref, '-rc') }}
+          makeLatest: ${{ !contains(github.ref, '-rc') }}
+          bodyFile: release-notes.md
       - name: Publish platform-specific npm packages
         if: startsWith(github.ref, 'refs/tags/v')
         run: cd npm && npm publish --workspaces --tag=${{ contains(github.ref, '-rc') && 'next' || 'latest' }}
