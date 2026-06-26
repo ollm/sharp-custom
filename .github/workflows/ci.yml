@@ -3,7 +3,7 @@ on:
   - push
   - pull_request
 env:
-  SHARP_TAG: 8c55eecb2c1481306faade1d971ec9c6216cbe2f # v0.35.2
+  SHARP_TAG: 086cc8983720255c8b88ec48972dc38904afe0d5 # v0.35.2
   SHARP_IGNORE_GLOBAL_LIBVIPS: '1'
 permissions: {}
 jobs:
