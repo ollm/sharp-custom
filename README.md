@@ -8,7 +8,6 @@ Built from: [`lovell/sharp`](https://github.com/lovell/sharp/)
 - `JP2` support
 - ~~`AV1_HIGHBITDEPTH` enabled for 10/12-bit AVIF decoding~~ (Now included in the official builds since https://github.com/lovell/sharp-libvips/pull/367 and https://github.com/libvips/build-win64-mxe/pull/96)
 
-> `WASM` builds are not available.
 `JXL` is not available on `linux-s390x`, `linux-riscv64`, and `linux-armv6` due to missing Highway SIMD support.
 
 > [!WARNING]

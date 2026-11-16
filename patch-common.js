@@ -68,11 +68,12 @@ walk(ROOT, (file) => {
 			search: /t\.assert\.ok\(semver\.valid\(sharp\.versions\.vips\)\);/g,
 			replace: 't.assert.ok(true);',
 		},
-		/*
+		
 		{	// Replace version (Only for developing): sharp
-			search: /"0\.35\.0-rc\.[0-9]+"/g,
-			replace: '"0.14.1"',
+			search: /"0\.35\.5"/g,
+			replace: '"0.35.5-wasm"',
 		},
+		/*
 		{	// Replace version (Only for developing): sharp-libvips
 			search: /"1\.3\.0-rc\.[0-9]+"/g,
 			replace: '"1.3.0-rc.6-7"',
@@ -86,3 +87,10 @@ walk(ROOT, (file) => {
 	processFile(file, replacements);
 
 });
+
+// Rename docs file (Only for developing)
+const oldFilePath = path.join(ROOT, 'docs', 'src', 'content', 'docs', 'changelog', 'v0.35.5.md');
+const newFilePath = path.join(ROOT, 'docs', 'src', 'content', 'docs', 'changelog', 'v0.35.5-wasm.md');
+
+fs.renameSync(oldFilePath, newFilePath);
+console.log(`Renamed: ${oldFilePath} -> ${newFilePath}`);
