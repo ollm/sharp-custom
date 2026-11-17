@@ -186,6 +186,14 @@ jobs:
           mkdir -p "$RUNNER_TEMP/python-shim"
           ln -sf "$(command -v python3.12)" "$RUNNER_TEMP/python-shim/python3"
           export PATH="$RUNNER_TEMP/python-shim:$PATH"
+          mkdir -p "$RUNNER_TEMP/pcre2-src"
+          curl --fail --location https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.42/pcre2-10.42.tar.gz | tar xz --strip-components=1 -C "$RUNNER_TEMP/pcre2-src"
+          cd "$RUNNER_TEMP/pcre2-src"
+          ./configure --prefix="$RUNNER_TEMP/pcre2" --libdir="$RUNNER_TEMP/pcre2/lib" --enable-shared --disable-static
+          make -j2
+          make install
+          export PKG_CONFIG_PATH="$RUNNER_TEMP/pcre2/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
+          export LD_LIBRARY_PATH="$RUNNER_TEMP/pcre2/lib"
           mkdir -p "$RUNNER_TEMP/glib"
           curl --fail --location https://download.gnome.org/sources/glib/2.80/glib-2.80.0.tar.xz | tar xJ --strip-components=1 -C "$RUNNER_TEMP/glib"
           cd "$RUNNER_TEMP/glib"
@@ -195,7 +203,7 @@ jobs:
             -Dtests=false -Dglib_assert=false -Dglib_checks=false -Dglib_debug=disabled
           meson install -C _build
           test -f "$RUNNER_TEMP/system-glib/lib/libglib-2.0.so.0"
-          echo "LD_LIBRARY_PATH=$RUNNER_TEMP/system-glib/lib" >> "$GITHUB_ENV"
+          echo "LD_LIBRARY_PATH=$RUNNER_TEMP/system-glib/lib:$RUNNER_TEMP/pcre2/lib" >> "$GITHUB_ENV"
       # CUSTOM - END
       - name: Dependencies (Linux musl)
         if: contains(matrix.container, 'alpine')
@@ -375,7 +383,10 @@ jobs:
             apt-get install -y curl g++ git libatomic1 "$glib_package" make python3 xz-utils
             case "${{ matrix.base_image }}" in
               *debian:bookworm*)
-                apt-get install -y libffi-dev libpcre2-dev meson ninja-build pkg-config python3-packaging zlib1g-dev
+                apt-get install -y libffi-dev libpcre2-dev ninja-build pkg-config python3-venv zlib1g-dev
+                python3 -m venv /tmp/meson-venv
+                /tmp/meson-venv/bin/pip install meson packaging
+                export PATH="/tmp/meson-venv/bin:$PATH"
                 mkdir -p /tmp/glib
                 curl --fail --location https://download.gnome.org/sources/glib/2.80/glib-2.80.0.tar.xz | tar xJ --strip-components=1 -C /tmp/glib
                 meson setup /tmp/glib/_build /tmp/glib --default-library=shared --buildtype=release --prefix=/tmp/system-glib --libdir=lib \
