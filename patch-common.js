@@ -68,6 +68,10 @@ walk(ROOT, (file) => {
 			search: /t\.assert\.ok\(semver\.valid\(sharp\.versions\.vips\)\);/g,
 			replace: 't.assert.ok(true);',
 		},
+		{	// Update expected Yarn locator hash after renaming @img packages
+			search: /t\.assert\.strictEqual\(locatorHash, 'e8750f0ab9'\);/g,
+			replace: "t.assert.strictEqual(locatorHash, '10e8fa7be0');",
+		},
 		
 		{	// Replace version (Only for developing): sharp
 			search: /"0\.35\.5"/g,

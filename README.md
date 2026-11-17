@@ -13,7 +13,7 @@ Built from: [`lovell/sharp`](https://github.com/lovell/sharp/)
 > [!WARNING]
 > Prefer the official Sharp binaries unless you specifically need these features.
 
-Linux binaries use the host system's GLib at runtime, which must be available on the target system. This is a temporary workaround for https://github.com/electron/electron/issues/46323.
+Linux binaries use the host system's GLib 2.80 or later at runtime, which must be available on the target system. This is a temporary workaround for https://github.com/electron/electron/issues/46323.
 
 ## Usage
 

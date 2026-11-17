@@ -174,11 +174,25 @@ jobs:
       - name: Dependencies (Rocky Linux glibc)
         if: contains(matrix.container, 'rockylinux')
         run: |
-          dnf install -y gcc-toolset-14-gcc-c++ make git python3.12 fontconfig
+          dnf install -y gcc-toolset-14-gcc-c++ make git pkgconf-pkg-config python3.12 python3.12-pip fontconfig libffi-devel pcre2-devel zlib-devel
           echo "/opt/rh/gcc-toolset-14/root/usr/bin" >> $GITHUB_PATH
+          pip3.12 install meson ninja
+      - name: System GLib (tests)
+        if: contains(matrix.container, 'rockylinux')
+        run: |
+          mkdir -p "$RUNNER_TEMP/glib"
+          curl --fail --location https://download.gnome.org/sources/glib/2.80/glib-2.80.0.tar.xz | tar xJ --strip-components=1 -C "$RUNNER_TEMP/glib"
+          cd "$RUNNER_TEMP/glib"
+          meson setup _build --default-library=shared --buildtype=release --prefix="$RUNNER_TEMP/system-glib" --libdir=lib \
+            --force-fallback-for=gvdb \
+            -Dintrospection=disabled -Dnls=disabled -Dlibmount=disabled -Dsysprof=disabled -Dlibelf=disabled \
+            -Dtests=false -Dglib_assert=false -Dglib_checks=false -Dglib_debug=disabled
+          meson install -C _build
+          test -f "$RUNNER_TEMP/system-glib/lib/libglib-2.0.so.0"
+          echo "LD_LIBRARY_PATH=$RUNNER_TEMP/system-glib/lib" >> "$GITHUB_ENV"
       - name: Dependencies (Linux musl)
         if: contains(matrix.container, 'alpine')
-        run: apk add build-base git python3 fontconfig --update-cache
+        run: apk add build-base git python3 fontconfig glib --update-cache
       - name: Dependencies (Python - macOS, Windows)
         if: contains(matrix.os, 'macos') || contains(matrix.os, 'windows')
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
@@ -346,7 +360,7 @@ jobs:
             CXXFLAGS: "${{ matrix.compiler_flags }}"
           run: |
             apt-get update
-            apt-get install -y curl g++ git libatomic1 make python3 xz-utils
+            apt-get install -y curl g++ git libatomic1 libglib2.0-0t64 make python3 xz-utils
             mkdir /opt/nodejs
             curl --silent https://${{ matrix.nodejs_hostname }}/download/release/v${{ matrix.nodejs_version}}/node-v${{ matrix.nodejs_version}}-linux-${{ matrix.nodejs_arch }}.tar.xz | tar xJC /opt/nodejs --strip-components=1
             export PATH=$PATH:/opt/nodejs/bin
