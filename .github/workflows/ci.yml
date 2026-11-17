@@ -174,12 +174,15 @@ jobs:
       - name: Dependencies (Rocky Linux glibc)
         if: contains(matrix.container, 'rockylinux')
         run: |
-          dnf install -y gcc-toolset-14-gcc-c++ make git pkgconf-pkg-config python3.12 python3.12-pip fontconfig libffi-devel pcre2-devel xz zlib-devel
+          # CUSTOM - START
+          dnf install -y gcc-toolset-14-gcc-c++ make git pkgconf-pkg-config python3.12 python3.12-pip python3-packaging fontconfig libffi-devel pcre2-devel xz zlib-devel
+          # CUSTOM - END
           echo "/opt/rh/gcc-toolset-14/root/usr/bin" >> $GITHUB_PATH
-          pip3.12 install meson ninja
+      # CUSTOM - START
       - name: System GLib (tests)
         if: contains(matrix.container, 'rockylinux')
         run: |
+          pip3.12 install meson ninja
           mkdir -p "$RUNNER_TEMP/glib"
           curl --fail --location https://download.gnome.org/sources/glib/2.80/glib-2.80.0.tar.xz | tar xJ --strip-components=1 -C "$RUNNER_TEMP/glib"
           cd "$RUNNER_TEMP/glib"
@@ -190,6 +193,7 @@ jobs:
           meson install -C _build
           test -f "$RUNNER_TEMP/system-glib/lib/libglib-2.0.so.0"
           echo "LD_LIBRARY_PATH=$RUNNER_TEMP/system-glib/lib" >> "$GITHUB_ENV"
+      # CUSTOM - END
       - name: Dependencies (Linux musl)
         if: contains(matrix.container, 'alpine')
         run: apk add build-base git python3 fontconfig --update-cache
@@ -360,12 +364,28 @@ jobs:
             CXXFLAGS: "${{ matrix.compiler_flags }}"
           run: |
             apt-get update
-            glib_package=libglib2.0-0t64
-            if ! apt-cache show "$glib_package" >/dev/null 2>&1; then
-              glib_package=libglib2.0-0
-            fi
-            apt-get install -y curl g++ git libatomic1 "$glib_package" make python3 xz-utils
-            mkdir /opt/nodejs
+              # CUSTOM - START
+              glib_package=libglib2.0-0t64
+              if ! apt-cache show "$glib_package" >/dev/null 2>&1; then
+                glib_package=libglib2.0-0
+              fi
+              apt-get install -y curl g++ git libatomic1 "$glib_package" make python3 xz-utils
+              case "${{ matrix.base_image }}" in
+                *debian:bookworm*)
+                  apt-get install -y libffi-dev libpcre2-dev meson ninja-build pkg-config python3-packaging zlib1g-dev
+                  mkdir -p /tmp/glib
+                  curl --fail --location https://download.gnome.org/sources/glib/2.80/glib-2.80.0.tar.xz | tar xJ --strip-components=1 -C /tmp/glib
+                  meson setup /tmp/glib/_build --default-library=shared --buildtype=release --prefix=/tmp/system-glib --libdir=lib \
+                    --force-fallback-for=gvdb \
+                    -Dintrospection=disabled -Dnls=disabled -Dlibmount=disabled -Dsysprof=disabled -Dlibelf=disabled \
+                    -Dtests=false -Dglib_assert=false -Dglib_checks=false -Dglib_debug=disabled
+                  meson install -C /tmp/glib/_build
+                  test -f /tmp/system-glib/lib/libglib-2.0.so.0
+                  export LD_LIBRARY_PATH="/tmp/system-glib/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+                  ;;
+              esac
+              # CUSTOM - END
+              mkdir /opt/nodejs
             curl --silent https://${{ matrix.nodejs_hostname }}/download/release/v${{ matrix.nodejs_version}}/node-v${{ matrix.nodejs_version}}-linux-${{ matrix.nodejs_arch }}.tar.xz | tar xJC /opt/nodejs --strip-components=1
             export PATH=$PATH:/opt/nodejs/bin
             npm install
