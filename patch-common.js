@@ -71,7 +71,7 @@ walk(ROOT, (file) => {
 		
 		{	// Replace version (Only for developing): sharp
 			search: /"0\.35\.5"/g,
-			replace: '"0.35.5-wasm"',
+			replace: '"0.35.5-wasm.2"',
 		},
 		/*
 		{	// Replace version (Only for developing): sharp-libvips
@@ -90,7 +90,7 @@ walk(ROOT, (file) => {
 
 // Rename docs file (Only for developing)
 const oldFilePath = path.join(ROOT, 'docs', 'src', 'content', 'docs', 'changelog', 'v0.35.5.md');
-const newFilePath = path.join(ROOT, 'docs', 'src', 'content', 'docs', 'changelog', 'v0.35.5-wasm.md');
+const newFilePath = path.join(ROOT, 'docs', 'src', 'content', 'docs', 'changelog', 'v0.35.5-wasm.2.md');
 
 fs.renameSync(oldFilePath, newFilePath);
 console.log(`Renamed: ${oldFilePath} -> ${newFilePath}`);

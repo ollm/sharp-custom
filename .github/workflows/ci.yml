@@ -105,12 +105,12 @@ jobs:
             nodejs_version: "^20.9.0"
             nodejs_version_major: 20
             platform: darwin-x64
-          # - os: macos-15-intel
-          #  - nodejs_arch: x64
-          #    nodejs_version: "^22"
-          #    nodejs_version_major: 22
-          #    platform: darwin-x64
-          #    package: true
+          - os: macos-15-intel
+            nodejs_arch: x64
+            nodejs_version: "^22"
+            nodejs_version_major: 22
+            platform: darwin-x64
+            package: true
           - os: macos-15-intel
             nodejs_arch: x64
             nodejs_version: "^24"
@@ -121,12 +121,12 @@ jobs:
             nodejs_version: "^20.9.0"
             nodejs_version_major: 20
             platform: darwin-arm64
-          # - os: macos-15
-          #  - nodejs_arch: arm64
-          #    nodejs_version: "^22"
-          #    nodejs_version_major: 22
-          #    platform: darwin-arm64
-          #    package: true
+          - os: macos-15
+            nodejs_arch: arm64
+            nodejs_version: "^22"
+            nodejs_version_major: 22
+            platform: darwin-arm64
+            package: true
           - os: macos-15
             nodejs_arch: arm64
             nodejs_version: "^24"
