@@ -70,7 +70,7 @@ walk(ROOT, (file) => {
 		},
 		{	// Update expected Yarn locator hash after renaming @img packages
 			search: /t\.assert\.strictEqual\(locatorHash, 'e8750f0ab9'\);/g,
-			replace: "t.assert.strictEqual(locatorHash, '10e8fa7be0');",
+			replace: "t.assert.strictEqual(locatorHash, 'dfd0bc15ee');",
 		},
 		
 		{	// Replace version (Only for developing): sharp
@@ -79,7 +79,7 @@ walk(ROOT, (file) => {
 		},
 		{	// Replace version (Only for developing): sharp-libvips
 			search: /"1\.3\.4"/g,
-			replace: '"1.3.4-glib"',
+			replace: '"1.3.4-glib.1"',
 		},
 		/*
 		{	// Replace version (Only for developing): libvips
