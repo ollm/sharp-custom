@@ -195,7 +195,7 @@ jobs:
           export PKG_CONFIG_PATH="$RUNNER_TEMP/pcre2/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
           export LD_LIBRARY_PATH="$RUNNER_TEMP/pcre2/lib"
           mkdir -p "$RUNNER_TEMP/glib"
-          curl --fail --location https://download.gnome.org/sources/glib/2.80/glib-2.80.0.tar.xz | tar xJ --strip-components=1 -C "$RUNNER_TEMP/glib"
+          curl --fail --location https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz | tar xJ --strip-components=1 -C "$RUNNER_TEMP/glib"
           cd "$RUNNER_TEMP/glib"
           meson setup _build --default-library=shared --buildtype=release --prefix="$RUNNER_TEMP/system-glib" --libdir=lib \
             --force-fallback-for=gvdb \
@@ -388,7 +388,7 @@ jobs:
                 /tmp/meson-venv/bin/pip install meson packaging
                 export PATH="/tmp/meson-venv/bin:$PATH"
                 mkdir -p /tmp/glib
-                curl --fail --location https://download.gnome.org/sources/glib/2.80/glib-2.80.0.tar.xz | tar xJ --strip-components=1 -C /tmp/glib
+                curl --fail --location https://download.gnome.org/sources/glib/2.82/glib-2.82.0.tar.xz | tar xJ --strip-components=1 -C /tmp/glib
                 meson setup /tmp/glib/_build /tmp/glib --default-library=shared --buildtype=release --prefix=/tmp/system-glib --libdir=lib \
                   --force-fallback-for=gvdb \
                   -Dintrospection=disabled -Dnls=disabled -Dlibmount=disabled -Dsysprof=disabled -Dlibelf=disabled \
