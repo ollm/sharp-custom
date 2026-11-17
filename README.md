@@ -13,6 +13,8 @@ Built from: [`lovell/sharp`](https://github.com/lovell/sharp/)
 > [!WARNING]
 > Prefer the official Sharp binaries unless you specifically need these features.
 
+Linux binaries use the host system's GLib at runtime, which must be available on the target system. This is a temporary workaround for https://github.com/electron/electron/issues/46323.
+
 ## Usage
 
 Add the following `overrides` to your `package.json`, making sure the versions match your installed `sharp` and `sharp-libvips` dependencies.
