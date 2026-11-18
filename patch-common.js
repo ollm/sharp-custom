@@ -75,11 +75,11 @@ walk(ROOT, (file) => {
 		
 		{	// Replace version (Only for developing): sharp
 			search: /"0\.35\.5"/g,
-			replace: '"0.35.5-glib.2"',
+			replace: '"0.35.5-glib.3"',
 		},
 		{	// Replace version (Only for developing): sharp-libvips
 			search: /"1\.3\.4"/g,
-			replace: '"1.3.4-glib.1"',
+			replace: '"1.3.4-glib.3"',
 		},
 		/*
 		{	// Replace version (Only for developing): libvips
@@ -94,7 +94,7 @@ walk(ROOT, (file) => {
 
 // Rename docs file (Only for developing)
 const oldFilePath = path.join(ROOT, 'docs', 'src', 'content', 'docs', 'changelog', 'v0.35.5.md');
-const newFilePath = path.join(ROOT, 'docs', 'src', 'content', 'docs', 'changelog', 'v0.35.5-glib.2.md');
+const newFilePath = path.join(ROOT, 'docs', 'src', 'content', 'docs', 'changelog', 'v0.35.5-glib.3.md');
 
 fs.renameSync(oldFilePath, newFilePath);
 console.log(`Renamed: ${oldFilePath} -> ${newFilePath}`);
