@@ -70,7 +70,7 @@ walk(ROOT, (file) => {
 		},
 		{	// Update expected Yarn locator hash after renaming @img packages
 			search: /t\.assert\.strictEqual\(locatorHash, 'e8750f0ab9'\);/g,
-			replace: "t.assert.strictEqual(locatorHash, 'dfd0bc15ee');",
+			replace: "t.assert.strictEqual(locatorHash, 'ff68b5a9b3');",
 		},
 		
 		{	// Replace version (Only for developing): sharp

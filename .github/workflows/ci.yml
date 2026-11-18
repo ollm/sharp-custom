@@ -191,7 +191,7 @@ jobs:
           cd "$RUNNER_TEMP/glib"
           meson setup _build --default-library=shared --buildtype=release --prefix="$RUNNER_TEMP/system-glib" --libdir=lib \
             --force-fallback-for=gvdb \
-            -Dintrospection=disabled -Dnls=disabled -Dlibmount=disabled -Dsysprof=disabled -Dlibelf=disabled \
+            -Dnls=disabled -Dlibmount=disabled -Dsysprof=disabled -Dlibelf=disabled \
             -Dtests=false -Dglib_assert=false -Dglib_checks=false -Dglib_debug=disabled
           meson install -C _build
           test -f "$RUNNER_TEMP/system-glib/lib/libglib-2.0.so.0"
